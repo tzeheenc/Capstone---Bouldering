@@ -4,7 +4,7 @@ import io
 import zipfile
 import requests
 import pandas as pd
-import reverse_geocoder
+import reverse_geocode 
 import sys
 
 url = "https://github.com/OpenBeta/climbing-data/raw/main/curated_datasets/Curated_OpenBetaAug2020_RytherAnderson.pkl.zip"
@@ -68,14 +68,14 @@ for location in df["parent_loc"]:
     latitude = location[1]
     coordinates.append((latitude, longitude))
 
-print("Looking up states and countries...")
-results = reverse_geocoder.search(coordinates)
+print("Looking up states and countries")
+results = reverse_geocode.search (coordinates)
 
 country_codes = []
 states = []
 for r in results:
-    country_codes.append(r["cc"])
-    states.append(r["admin1"])
+    country_codes.append(r["country_code"]) 
+    states.append(r["state"])   
 df["country"] = country_codes
 df["state"] = states
 
